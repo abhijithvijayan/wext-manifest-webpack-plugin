@@ -1,6 +1,6 @@
 {
 	"name": "wext-manifest-webpack-plugin",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Webpack plugin to solve the problem of generating js file for manifest.json entry",
 	"license": "MIT",
 	"author": "abhijithvijayan",
@@ -19,7 +19,7 @@
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"files": [
-		"/dist"
+		"/lib"
 	],
 	"keywords": [
 		"webextension",
