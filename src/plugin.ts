@@ -25,28 +25,38 @@ function getEntryResource(module: CompilationModule | undefined): string | null 
 export class WextManifestWebpackPlugin {
 	// Define `apply` as its prototype method which is supplied with compiler as its argument
 	apply(compiler: webpack.Compiler): void {
-		// Runs plugin after a compilation has been created.
-		compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation: webpack.compilation.Compilation) => {
-			// Triggered when an asset from a chunk was added to the compilation.
-			compilation.hooks.chunkAsset.tap(PLUGIN_NAME, (chunk: webpack.compilation.Chunk, file: string) => {
-				// Only handle js files with entry modules
-				if (!file.endsWith('.js') || !chunk.hasEntryModule()) {
-					return;
-				}
+		/**
+		 *  webpack 4+ comes with a new plugin system.
+		 *
+		 *  (// ToDo: support old plugin system //)
+		 */
+		const { hooks } = compiler;
 
-				// Returns path containing name of asset
-				const resource: null | string = getEntryResource(chunk.entryModule);
-				const isManifest: boolean = (resource && /manifest\.json$/.test(resource)) || false;
+		// Check for hooks for 4+
+		if (hooks) {
+			// Runs plugin after a compilation has been created.
+			hooks.compilation.tap(PLUGIN_NAME, (compilation: webpack.compilation.Compilation) => {
+				// Triggered when an asset from a chunk was added to the compilation.
+				compilation.hooks.chunkAsset.tap(PLUGIN_NAME, (chunk: webpack.compilation.Chunk, file: string) => {
+					// Only handle js files with entry modules
+					if (!file.endsWith('.js') || !chunk.hasEntryModule()) {
+						return;
+					}
 
-				if (isManifest) {
-					chunk.files = chunk.files.filter((f) => {
-						return f !== file;
-					});
+					// Returns path containing name of asset
+					const resource: null | string = getEntryResource(chunk.entryModule);
+					const isManifest: boolean = (resource && /manifest\.json$/.test(resource)) || false;
 
-					delete compilation.assets[file];
-					console.error(`${PLUGIN_NAME}: Removed js from manifest module: ${file}`);
-				}
+					if (isManifest) {
+						chunk.files = chunk.files.filter((f: string) => {
+							return f !== file;
+						});
+
+						delete compilation.assets[file];
+						console.error(`${PLUGIN_NAME}: Removed js from manifest module: ${file}`);
+					}
+				});
 			});
-		});
+		}
 	}
 }
