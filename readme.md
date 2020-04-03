@@ -27,10 +27,10 @@ Checkout [web-extension-starter](https://github.com/abhijithvijayan/web-extensio
 ## Installation
 
 ```sh
+# npm
 npm install --save-dev wext-manifest-webpack-plugin
-```
-or
-```sh
+
+# yarn
 yarn add wext-manifest-webpack-plugin --dev
 ```
 
