@@ -21,7 +21,7 @@
 		"skipLibCheck": true
 	},
 	"include": [
-		"src/**/*"
+		"source"
 	],
 	"exclude": [
 		"node_modules"
