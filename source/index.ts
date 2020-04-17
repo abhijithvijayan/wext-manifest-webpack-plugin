@@ -1,4 +1,4 @@
-import { WextManifestWebpackPlugin } from './plugin';
+import {WextManifestWebpackPlugin} from './plugin';
 
 export default WextManifestWebpackPlugin;
 
