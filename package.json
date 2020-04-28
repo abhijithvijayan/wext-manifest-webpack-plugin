@@ -52,5 +52,8 @@
 		"rimraf": "^3.0.2",
 		"typescript": "^3.8.3",
 		"webpack": "^4.42.1"
+	},
+	"dependencies": {
+		"unicorn.log": "^1.7.0"
 	}
 }

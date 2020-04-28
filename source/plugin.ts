@@ -1,8 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
+
 /**
- *  @author abhijithvijayan <abhijithvijayan.in>
+ *  wext-manifest-webpack-plugin
+ *
+ *  @author   abhijithvijayan <abhijithvijayan.in>
+ *  @license  MIT License
  */
 
+import 'unicorn.log';
 import {Compiler, compilation as compilationType} from 'webpack';
 
 const PLUGIN_NAME = 'wext-manifest-webpack-plugin';
@@ -62,9 +67,7 @@ export class WextManifestWebpackPlugin {
               });
 
               delete compilation.assets[file];
-              console.warn(
-                `${PLUGIN_NAME}: Removed ${file} from manifest module`
-              );
+              console.unicorn(`${PLUGIN_NAME}: removed ${file}`, 29);
             }
           }
         );
