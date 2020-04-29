@@ -54,6 +54,6 @@
 		"webpack": "^4.42.1"
 	},
 	"dependencies": {
-		"unicorn.log": "^1.7.0"
+		"emoji-log": "^1.0.2"
 	}
 }
