@@ -67,7 +67,9 @@ export class WextManifestWebpackPlugin {
               });
 
               delete compilation.assets[file];
-              console.emoji('🦄', `${PLUGIN_NAME}: removed ${file}`, 29);
+              // https://github.com/abhijithvijayan/wext-manifest-webpack-plugin/issues/1
+              // console.emoji('🦄', `${PLUGIN_NAME}: removed ${file}`, 29);
+              console.log(`${PLUGIN_NAME}: removed ${file}`);
             }
           }
         );
