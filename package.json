@@ -1,6 +1,6 @@
 {
 	"name": "wext-manifest-webpack-plugin",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "Webpack plugin to solve the problem of generating js file for manifest.json entry",
 	"license": "MIT",
 	"repository": "https://github.com/abhijithvijayan/wext-manifest-webpack-plugin.git",
