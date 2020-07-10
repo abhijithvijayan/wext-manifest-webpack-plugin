@@ -5,13 +5,13 @@
     <img src="https://img.shields.io/npm/v/wext-manifest-webpack-plugin" alt="NPM" />
   </a>
   <a href="https://travis-ci.org/abhijithvijayan/wext-manifest-webpack-plugin">
-    <img src="https://travis-ci.org/abhijithvijayan/wext-manifest-webpack-plugin.svg?branch=master" alt="Travis Build" />
+    <img src="https://travis-ci.org/abhijithvijayan/wext-manifest-webpack-plugin.svg?branch=main" alt="Travis Build" />
   </a>
   </a>
   <a href="https://david-dm.org/abhijithvijayan/wext-manifest-webpack-plugin">
     <img src="https://img.shields.io/david/abhijithvijayan/wext-manifest-webpack-plugin.svg?colorB=orange" alt="DEPENDENCIES" />
   </a>
-  <a href="https://github.com/abhijithvijayan/wext-manifest-webpack-plugin/blob/master/license">
+  <a href="https://github.com/abhijithvijayan/wext-manifest-webpack-plugin/blob/main/license">
     <img src="https://img.shields.io/github/license/abhijithvijayan/wext-manifest-webpack-plugin.svg" alt="LICENSE" />
   </a>
   <a href="https://twitter.com/intent/tweet?text=Check%20out%20wext-manifest-webpack-plugin%21%20by%20%40_abhijithv%0A%0AWebpack%20plugin%20to%20solve%20the%20problem%20of%20generating%20js%20file%20for%20manifest.json%20entry%0Ahttps%3A%2F%2Fgithub.com%2Fabhijithvijayan%2Fwext-manifest-webpack-plugin%0A%0A%23webpack%20%23manifest%20%23webextension%20%23plugin">
