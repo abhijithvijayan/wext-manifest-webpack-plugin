@@ -21,7 +21,7 @@
 		"dev": "tsc --watch",
 		"build": "rimraf lib && tsc",
 		"pack:list": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-		"prepublishOnly": "yarn build",
+		"prepublishOnly": "npm run build",
 		"lint": "eslint . --ext .ts",
 		"lint:fix": "eslint . --ext .ts --fix"
 	},
@@ -36,29 +36,26 @@
 		"edge",
 		"opera"
 	],
-	"dependencies": {
-		"emoji-log": "^1.0.2"
-	},
 	"devDependencies": {
-		"@abhijithvijayan/eslint-config": "2.5.3",
+		"@abhijithvijayan/eslint-config": "2.6.3",
 		"@abhijithvijayan/eslint-config-airbnb": "^1.0.2",
-		"@abhijithvijayan/tsconfig": "^1.2.0",
+		"@abhijithvijayan/tsconfig": "^1.3.0",
+		"@babel/eslint-parser": "^7.14.4",
 		"@types/loader-utils": "^2.0.1",
 		"@types/webpack": "^4.41.18",
-		"@typescript-eslint/eslint-plugin": "^3.5.0",
-		"@typescript-eslint/parser": "^3.5.0",
-		"babel-eslint": "^10.1.0",
-		"eslint": "^7.3.1",
-		"eslint-config-prettier": "^6.11.0",
-		"eslint-plugin-import": "^2.22.0",
-		"eslint-plugin-jsx-a11y": "^6.3.1",
+		"@typescript-eslint/eslint-plugin": "^4.25.0",
+		"@typescript-eslint/parser": "^4.25.0",
+		"eslint": "^7.27.0",
+		"eslint-config-prettier": "^6.15.0",
+		"eslint-plugin-import": "^2.23.4",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
 		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-prettier": "^3.1.4",
-		"eslint-plugin-react": "^7.20.3",
-		"eslint-plugin-react-hooks": "^4.0.5",
-		"prettier": "^2.0.5",
+		"eslint-plugin-prettier": "^3.4.0",
+		"eslint-plugin-react": "^7.24.0",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"prettier": "^2.3.0",
 		"rimraf": "^3.0.2",
-		"typescript": "^3.9.6",
+		"typescript": "^4.2.3",
 		"webpack": "^4.43.0"
 	}
 }

@@ -7,7 +7,6 @@
  *  @license  MIT License
  */
 
-import 'emoji-log';
 import {Compiler, compilation as compilationType} from 'webpack';
 
 const PLUGIN_NAME = 'wext-manifest-webpack-plugin';
@@ -67,8 +66,6 @@ export class WextManifestWebpackPlugin {
               });
 
               delete compilation.assets[file];
-              // https://github.com/abhijithvijayan/wext-manifest-webpack-plugin/issues/1
-              // console.emoji('🦄', `${PLUGIN_NAME}: removed ${file}`, 29);
               console.log(`${PLUGIN_NAME}: removed ${file}`);
             }
           }
