@@ -31,33 +31,42 @@ function collectEntryResources(
   module: CompilationModule,
   cache: Array<ReturnType<typeof getEntryResources>>
 ): ReturnType<typeof getEntryResources> {
-  const index = compilation.moduleGraph.getPreOrderIndex(module as never) ?? -1;
-
+  const hasModuleGraphSupport = Object.prototype.hasOwnProperty.call(
+    compilation,
+    'moduleGraph'
+  );
   // index of module is unique per compilation
   // module.id can be null, not used here
+  const index = hasModuleGraphSupport
+    ? compilation.moduleGraph.getPreOrderIndex(module as never) ?? 1
+    : 1;
+
+  // get from cache
   if (cache[index] !== undefined) {
     return cache[index];
   }
 
   if (module && typeof module.resource === 'string') {
     cache[index] = getEntryResources(module);
+
     return cache[index];
   }
 
   const resources: ReturnType<typeof getEntryResources> = [];
+
+  // if the json file is imported using a javascript file
+  // will need to go through dependencies to extract the resources
   if (module && module.dependencies) {
-    const hasModuleGraphSupport = Object.prototype.hasOwnProperty.call(
-      compilation,
-      'moduleGraph'
-    );
     module.dependencies.forEach((dep) => {
       if (dep) {
-        const depModule = hasModuleGraphSupport
+        const depModule: Module | null = hasModuleGraphSupport
           ? compilation.moduleGraph.getModule(dep)
           : dep.module;
-        const originModule = hasModuleGraphSupport
+
+        const originModule: Module | null = hasModuleGraphSupport
           ? compilation.moduleGraph.getParentModule(dep)
           : (dep as Dependency & {originModule: Module}).originModule;
+
         const nextModule = depModule || originModule;
         if (nextModule) {
           const depResources = collectEntryResources(
@@ -65,7 +74,8 @@ function collectEntryResources(
             nextModule,
             cache
           );
-          for (let i = 0, {length} = depResources; i !== length; i += 1) {
+
+          for (let i = 0; i < depResources.length; i += 1) {
             resources.push(depResources[i]);
           }
         }
@@ -89,17 +99,25 @@ export class WextManifestWebpackPlugin {
 
         // Triggered when an asset from a chunk was added to the compilation.
         compilation.hooks.chunkAsset.tap(PLUGIN_NAME, (chunk, file: string) => {
+          const hasChunkGraphSupport = Object.prototype.hasOwnProperty.call(
+            compilation,
+            'chunkGraph'
+          );
+
           // Only handle js files with entry modules
           if (
             !file.endsWith('.js') ||
-            compilation.chunkGraph.getNumberOfEntryModules(chunk) < 1
+            (hasChunkGraphSupport &&
+              compilation.chunkGraph.getNumberOfEntryModules(chunk) < 1)
           ) {
             return;
           }
 
-          const entryModules: Array<Module> = Array.from(
-            compilation.chunkGraph.getChunkEntryModulesIterable(chunk)
-          );
+          const entryModules: Array<Module> = hasChunkGraphSupport
+            ? Array.from(
+                compilation.chunkGraph.getChunkEntryModulesIterable(chunk)
+              )
+            : [];
           if (entryModules.length < 1) {
             return;
           }
@@ -116,7 +134,13 @@ export class WextManifestWebpackPlugin {
           );
 
           if (isManifest) {
-            chunk.files.delete(file);
+            if (Array.isArray(chunk.files)) {
+              chunk.files = chunk.files.filter((f: string): boolean => {
+                return f !== file;
+              }) as never;
+            } else if (chunk.files instanceof Set) {
+              chunk.files.delete(file);
+            }
 
             delete compilation.assets[file];
             console.log(`${PLUGIN_NAME}: removed ${file}`);
