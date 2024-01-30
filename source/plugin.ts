@@ -117,7 +117,7 @@ export class WextManifestWebpackPlugin {
             ? Array.from(
                 compilation.chunkGraph.getChunkEntryModulesIterable(chunk)
               )
-            : [];
+            : [chunk.entryModule];
           if (entryModules.length < 1) {
             return;
           }
