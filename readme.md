@@ -61,6 +61,8 @@ npm install --save-dev wext-manifest-webpack-plugin
 yarn add wext-manifest-webpack-plugin --dev
 ```
 
+Version `1.4.0` adds support for webpack 5. Backward compatible with webpack 4 as well.
+
 ## Usage
 
 ```js
