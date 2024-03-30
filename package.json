@@ -21,7 +21,7 @@
 		"dev": "tsc --watch",
 		"build": "rimraf lib && tsc",
 		"pack:list": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-		"prepublishOnly": "npm run build",
+		"prepublishOnly": "npm run pack:list",
 		"lint": "eslint . --ext .ts",
 		"lint:fix": "eslint . --ext .ts --fix"
 	},
