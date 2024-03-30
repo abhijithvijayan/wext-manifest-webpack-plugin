@@ -12,6 +12,7 @@
 		"class-methods-use-this": "off",
 		"node/no-unsupported-features/es-syntax": ["error", {
 			"ignores": ["modules"]
-		}]
+		}],
+		"import/no-import-module-exports": "off"
 	}
 }
