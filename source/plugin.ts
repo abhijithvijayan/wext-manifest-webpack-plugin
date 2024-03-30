@@ -63,7 +63,7 @@ function collectEntryResources(
           ? compilation.moduleGraph.getModule(dep)
           : dep.module;
 
-        const originModule: Module | null = hasModuleGraphSupport
+        const originModule: Module | null | undefined = hasModuleGraphSupport
           ? compilation.moduleGraph.getParentModule(dep)
           : (dep as Dependency & {originModule: Module}).originModule;
 
